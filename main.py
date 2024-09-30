@@ -83,9 +83,7 @@ def generate_puzzle():
 
     map_to_nums = lambda L:list(map(lambda y:map_numbers[y-1],L))
     initial_puzzle = list(map(lambda x:map_to_nums(x),initial_puzzle))
-    # for i in initial_puzzle:
-    #     print(i)
-    # print()
+
     trial = copy.deepcopy(initial_puzzle)
     unsolved_puzzle = give_unsolved(trial,0,0)
     return initial_puzzle,unsolved_puzzle
@@ -101,7 +99,6 @@ def give_unsolved(puzzle,row,column):
         row = row+1
         column = 0
         if not k:
-            print("HI")
             k  = True
     if row == 9:
         return False
@@ -126,16 +123,6 @@ def give_unsolved(puzzle,row,column):
         return give_unsolved(puzzle,row,column+1)
     return temp
 
-
-
-# def make_more_changes(Possibilities):
-#     for value in range(1,10):
-#         for i in range(9):
-#             for j in range(9):
-#                 Possibilities[i][j]
-    
-# Can be made better by using bitmasks to store if a number can be present in a cell or not
-# Example if only numbers 2,3 are possible in a square 1*2^2+1*2^3 = 12 can be used to represent
 def solver(puzzle):
     possibilities = dict()
     Possibilities = []
@@ -176,7 +163,6 @@ def solver(puzzle):
     possibilities = possibilities[_index:]
     answers = [0]
     
-    #make_more_changes(Possibilities)
     solve(puzzle,possibilities,answers,Possibilities)
     if (answers[0] > 1) :
         return False
@@ -223,7 +209,7 @@ def solve(puzzle,possibilities,answers,Possibilities,index=0):
 
 
 
-#puzzle = generate_puzzle()
+
 sudoku_puzzle = [[5, 3, 4, 6, 7, 8, 9, 1, 2],
 [6, 7, 2, 1, 9, 5, 3, 4, 8],
 [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -237,23 +223,9 @@ sudoku_puzzle = [[5, 3, 4, 6, 7, 8, 9, 1, 2],
 
 
 
-# solver(sudoku_puzzle)
+
 solved , unsolved = generate_puzzle()
 display(solved)
 print("\n")
 display(unsolved)
 
-# print(solver(unsolved))
-
-# new = [
-#   ['', '', '', '', '', '', '', '', ''],
-# ['', 5, 2, 9, 6, 8, 4, 1, 3],
-# [9, 8, 6, 4, 1, 3, 7, 2, 5],
-# [1, 7, 3, 2, 5, 9, 6, 8, 4],
-# [2, 9, 5, 6, 8, 4, 1, 3, 7],
-# [6, 4, 8, 1, 3, 7, 2, 5, 9],
-# [3, 2, 7, 5, 9, 6, 8, 4, 1],
-# [5, 6, 9, 8, 4, 1, 3, 7, 2],
-# [8, 1, 4, 3, 7, 2, 5, 9, 6],
-# ]
-# print(solver(new))
